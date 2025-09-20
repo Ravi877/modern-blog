@@ -1,8 +1,0 @@
-{
-  "siteName": "My Modern Blog",
-  "menu": {
-    "Home": "index.html",
-    "Articles": "blog.html"
-  },
-  "footer": "© 2025 My Blog. All rights reserved."
-}
