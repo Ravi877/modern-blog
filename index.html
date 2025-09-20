@@ -1,0 +1,53 @@
+<!-- Homepage: Main landing page with hero section and recent blog posts -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Modern Blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="site-title">My Modern Blog</h1>
+            <ul class="nav-menu" id="nav-menu">
+                <!-- Menu items loaded from site-config.json -->
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title" id="hero-title">Welcome to My Blog</h1>
+            <p class="hero-tagline" id="hero-tagline">Sharing thoughts, ideas, and stories from my journey</p>
+            <a href="blog.html" class="cta-button">Read My Posts</a>
+        </div>
+    </section>
+
+    <!-- Recent Posts Section -->
+    <section class="recent-posts">
+        <div class="container">
+            <h2>Latest Posts</h2>
+            <div class="posts-grid" id="recent-posts-grid">
+                <!-- Recent posts loaded dynamically -->
+            </div>
+            <div class="view-all">
+                <a href="blog.html" class="view-all-link">View All Posts →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p id="footer-text">© 2025 My Blog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+</body>
+</html>

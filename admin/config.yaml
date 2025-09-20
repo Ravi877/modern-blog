@@ -1,0 +1,75 @@
+# DecapCMS Configuration: Controls what you can edit in your CMS admin panel
+# Access your admin panel at: yoursite.com/admin
+
+backend:
+  name: git-gateway
+  branch: main # Branch to update (this is usually 'main' for GitHub)
+
+# These lines should only be uncommented if you're testing locally
+# local_backend: true
+# backend:
+#   name: proxy
+#   proxy_url: http://localhost:8081/api/v1
+
+media_folder: "images" # Where uploaded images will be stored
+public_folder: "/images" # How to reference images in posts
+
+collections:
+  # Blog Posts Collection
+  - name: "blog" # Used in routes, e.g., /admin/collections/blog
+    label: "Blog Posts" # Used in the UI
+    folder: "blog-posts" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., post-title.md
+    fields: # The fields for each document, usually in Front Matter format
+      - {label: "Title", name: "title", widget: "string", hint: "The main title of your blog post"}
+      - {label: "Publish Date", name: "date", widget: "datetime", hint: "When this post was published"}
+      - {label: "Featured Post", name: "featured", widget: "boolean", default: false, hint: "Show this post prominently on homepage"}
+      - {label: "Excerpt", name: "excerpt", widget: "text", hint: "Short summary for post previews (2-3 sentences)"}
+      - {label: "Featured Image", name: "image", widget: "image", required: false, hint: "Main image for this post (optional)"}
+      - {label: "Body", name: "body", widget: "markdown", hint: "Your post content - use the toolbar to format text"}
+
+  # Homepage Settings
+  - name: "homepage"
+    label: "Homepage Settings"
+    files:
+      - file: "site-config.json"
+        label: "Site Configuration"
+        name: "site_config"
+        fields:
+          - {label: "Site Name", name: "siteName", widget: "string", hint: "Your website title"}
+          - {label: "Site Description", name: "siteDescription", widget: "text", hint: "Brief description of your site"}
+          - label: "Navigation Menu"
+            name: "menu"
+            widget: "object"
+            hint: "Links in your site's main menu"
+            fields:
+              - {label: "Home", name: "Home", widget: "string", default: "index.html"}
+              - {label: "Blog", name: "Blog", widget: "string", default: "blog.html"}
+          - label: "Homepage Content"
+            name: "homepage"
+            widget: "object"
+            fields:
+              - {label: "Hero Title", name: "heroTitle", widget: "string", hint: "Main headline on homepage"}
+              - {label: "Hero Tagline", name: "heroTagline", widget: "text", hint: "Subtitle under main headline"}
+              - {label: "Recent Posts Title", name: "recentPostsTitle", widget: "string", default: "Latest Posts"}
+              - {label: "Number of Recent Posts", name: "recentPostsCount", widget: "number", default: 3, min: 1, max: 6}
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - {label: "Footer Text", name: "text", widget: "string", hint: "Copyright text in footer"}
+          - label: "Blog Settings"
+            name: "blog"
+            widget: "object"
+            fields:
+              - {label: "Posts Per Page", name: "postsPerPage", widget: "number", default: 10}
+              - {label: "Show Excerpts", name: "showExcerpts", widget: "boolean", default: true}
+              - {label: "Excerpt Length", name: "excerptLength", widget: "number", default: 150}
+
+# Settings for the CMS interface
+# You can customize these to match your preferences
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"

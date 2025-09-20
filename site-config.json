@@ -1,0 +1,28 @@
+{
+  "_comment": "Website configuration: Edit these settings to change your site's title, menu, and footer",
+  
+  "siteName": "My Modern Blog",
+  "siteDescription": "Sharing thoughts, ideas, and stories from my journey",
+  
+  "menu": {
+    "Home": "index.html",
+    "Blog": "blog.html"
+  },
+  
+  "homepage": {
+    "heroTitle": "Welcome to My Blog",
+    "heroTagline": "Sharing thoughts, ideas, and stories from my journey",
+    "recentPostsTitle": "Latest Posts",
+    "recentPostsCount": 3
+  },
+  
+  "footer": {
+    "text": "© 2025 My Blog. All rights reserved."
+  },
+  
+  "blog": {
+    "postsPerPage": 10,
+    "showExcerpts": true,
+    "excerptLength": 150
+  }
+}

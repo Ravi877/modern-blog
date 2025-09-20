@@ -1,0 +1,62 @@
+<!-- Post Template: Layout used for each individual blog post -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Title - My Modern Blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="site-title">My Modern Blog</h1>
+            <ul class="nav-menu" id="nav-menu">
+                <!-- Menu items loaded from site-config.json -->
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Post Header -->
+    <section class="post-header">
+        <div class="container">
+            <a href="blog.html" class="back-link">← Back to Posts</a>
+            <h1 class="post-title" id="post-title">Loading...</h1>
+            <div class="post-meta">
+                <span class="post-date" id="post-date">Loading...</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Post Content -->
+    <article class="post-content">
+        <div class="container">
+            <div class="post-body" id="post-body">
+                <!-- Post content loaded dynamically -->
+            </div>
+        </div>
+    </article>
+
+    <!-- Post Navigation -->
+    <section class="post-navigation">
+        <div class="container">
+            <div class="nav-links">
+                <a href="#" class="nav-link prev-post" id="prev-post">← Previous Post</a>
+                <a href="#" class="nav-link next-post" id="next-post">Next Post →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p id="footer-text">© 2025 My Blog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+    <script src="post.js"></script>
+</body>
+</html>
