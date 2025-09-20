@@ -3,7 +3,7 @@
 
 backend:
   name: github
-  repo: https://github.com/Ravi877/modern-blog # Replace with your repo path
+  repo: Ravi877/modern-blog # Replace with your repo path
   branch: main # Or whatever your main branch is called
   
 # These lines should only be uncommented if you're testing locally
