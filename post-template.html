@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://unpkg.com/front-matter@4.0.2/dist/front-matter.js"></script>
+</head>
+<body>
+
+    <header>
+        <nav id="main-nav"></nav>
+    </header>
+
+    <main class="post-layout">
+        <article id="post-content">
+            </article>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Fetch config and build nav/footer
+            const configResponse = await fetch('site-config.json');
+            const config = await configResponse.json();
+            const nav = document.getElementById('main-nav');
+            for (const key in config.menu) {
+                const a = document.createElement('a');
+                a.href = config.menu[key];
+                a.textContent = key;
+                nav.appendChild(a);
+            }
+            document.getElementById('main-footer').textContent = config.footer;
+
+            // Get the post name from the URL (e.g., ?post=first-post)
+            const params = new URLSearchParams(window.location.search);
+            const postSlug = params.get('post');
+            const postContainer = document.getElementById('post-content');
+
+            if (postSlug) {
+                try {
+                    const response = await fetch(`blog-posts/${postSlug}.md`);
+                    if (!response.ok) throw new Error("Post file not found");
+                    
+                    const markdown = await response.text();
+
+                    // Safely parse the file content using the front-matter library
+                    const parsedContent = frontMatter(markdown);
+                    
+                    const postData = parsedContent.attributes; // This is the frontmatter (title, date)
+                    const postBody = parsedContent.body;       // This is the markdown content
+                    
+                    // Set the page title
+                    document.title = postData.title || "Blog Post";
+
+                    // Convert the blog content from Markdown to HTML
+                    const contentHtml = marked.parse(postBody);
+
+                    // Display the content on the page
+                    postContainer.innerHTML = `
+                        <h1>${postData.title}</h1>
+                        <p class="post-date">${postData.date}</p>
+                        ${contentHtml}
+                    `;
+                } catch (error) {
+                    postContainer.innerHTML = "<h1>Post not found</h1><p>Sorry, we couldn't find that blog post.</p>";
+                    console.error('Error fetching post:', error);
+                }
+            } else {
+                postContainer.innerHTML = "<h1>No post specified</h1><p>Please select a post from the blog page.</p>";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav id="main-nav"></nav>
+    </header>
+
+    <main>
+        <section class="page-title">
+            <h1>All Articles</h1>
+        </section>
+
+        <section class="all-posts">
+            <div id="all-posts-container" class="posts-grid">
+                </div>
+        </section>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script>
+        // --- CONFIGURATION ---
+        // IMPORTANT: Update this with your GitHub username and repository name.
+        const GITHUB_USERNAME = "your-github-username"; // <-- CHANGE THIS
+        const GITHUB_REPO = "your-repo-name"; // <-- CHANGE THIS
+        // --- END CONFIGURATION ---
+
+        async function fetchPosts() {
+            const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/blog-posts`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`GitHub API error: ${response.statusText}`);
+                const files = await response.json();
+                return files
+                    .filter(file => file.name.endsWith('.md'))
+                    .map(file => ({
+                        slug: file.name.replace('.md', ''),
+                        title: file.name.replace('.md', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+                        date: ''
+                    }))
+                    .reverse();
+            } catch (error) {
+                console.error("Could not fetch posts:", error);
+                return [];
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const configResponse = await fetch('site-config.json');
+            const config = await configResponse.json();
+            document.title = `${config.siteName} - Blog`;
+
+            const nav = document.getElementById('main-nav');
+            for (const key in config.menu) {
+                const a = document.createElement('a');
+                a.href = config.menu[key];
+                a.textContent = key;
+                nav.appendChild(a);
+            }
+            document.getElementById('main-footer').textContent = config.footer;
+
+            const posts = await fetchPosts();
+            const container = document.getElementById('all-posts-container');
+            container.innerHTML = '';
+
+            if (posts.length > 0) {
+                posts.forEach(post => {
+                    const postLink = document.createElement('a');
+                    postLink.href = `post-template.html?post=${post.slug}`;
+                    postLink.className = 'post-card';
+                    postLink.innerHTML = `<h3>${post.title}</h3><p>Click to read</p>`;
+                    container.appendChild(postLink);
+                });
+            } else {
+                container.innerHTML = "<p>No posts yet. Write one in the CMS!</p>";
+            }
+        });
+    </script>
+</body>
+</html>
