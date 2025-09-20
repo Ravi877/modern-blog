@@ -1,0 +1,21 @@
+{
+  "_comment": "Blog posts index: Add each new blog post here so it appears on your site",
+  "posts": [
+    {
+      "title": "Welcome to My Blog",
+      "slug": "welcome-post",
+      "date": "2025-01-15",
+      "excerpt": "This is my first post on this new blog. I'm excited to share my thoughts and experiences with you as I begin this journey.",
+      "featured": true,
+      "filename": "welcome-post.md"
+    },
+    {
+      "title": "Getting Started with Blogging",
+      "slug": "getting-started",
+      "date": "2025-01-20",
+      "excerpt": "Some thoughts on starting a blog and what I've learned so far in this journey of sharing ideas and connecting with readers.",
+      "featured": false,
+      "filename": "getting-started.md"
+    }
+  ]
+}
