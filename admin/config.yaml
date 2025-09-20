@@ -2,8 +2,9 @@
 # Access your admin panel at: yoursite.com/admin
 
 backend:
-  name: git-gateway
-  branch: main # Branch to update (this is usually 'main' for GitHub)
+  name: github
+  repo: your-github-username/your-repo-name # Replace with your repo path
+  branch: main # Or whatever your main branch is called
   
 # These lines should only be uncommented if you're testing locally
 # local_backend: true
